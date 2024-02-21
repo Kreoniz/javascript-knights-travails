@@ -8,7 +8,7 @@ class Position {
     const moves = [];
 
     // All moves for the knight
-    const moveList = [
+    const MOVE_LIST = [
       [2, 1],
       [-2, 1],
       [2, -1],
@@ -19,10 +19,10 @@ class Position {
       [-1, -2],
     ];
 
-    for (let i = 0; i < moveList.length; i += 1) {
+    for (let i = 0; i < MOVE_LIST.length; i += 1) {
       let move = this.coords.slice();
-      move[0] += moveList[i][0];
-      move[1] += moveList[i][1];
+      move[0] += MOVE_LIST[i][0];
+      move[1] += MOVE_LIST[i][1];
 
       if (
         move[0] >= 0
@@ -48,8 +48,10 @@ function knightMoves(start, end) {
   let pos = 0;
 
   while (JSON.stringify(pos.coords) !== JSON.stringify(end)) {
-    delete pos;
+    console.log('Queue:', queue.map((v) => v.coords));
+    console.log();
     pos = queue.shift();
+
     const moves = pos.getAvailableMoves();
     for (let i = 0; i < moves.length; i += 1) {
       if (!visited.includes(JSON.stringify(moves[i].coords))) {
@@ -61,3 +63,5 @@ function knightMoves(start, end) {
 
   return pos.path;
 }
+
+console.log(knightMoves([0, 0], [7, 7]));
